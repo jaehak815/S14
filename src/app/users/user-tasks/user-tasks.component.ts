@@ -16,7 +16,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './user-tasks.component.css',
   imports: [RouterOutlet, RouterLink],
 })
-export class UserTasksComponent{
+export class UserTasksComponent {
   userName = input.required<string>();
   message = input.required<string>();
   //private activatedRoute = inject(ActivatedRoute)
@@ -40,4 +40,11 @@ export const resolveUserName: ResolveFn<string> = (
       (u) => u.id === activatedRoute.paramMap.get('userId')
     )?.name || '';
   return userName;
+};
+
+export const resolveTitle: ResolveFn<string> = (
+  activatedRoute,
+  routerState 
+) => {
+  return resolveUserName(activatedRoute, routerState) + '\'s Tasks' 
 };
